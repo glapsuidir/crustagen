@@ -15,7 +15,7 @@ if [ "$VERSION" == "null" ]; then
 fi
 
 echo "Downloading $VERSION..."
-curl -L -o crustagen $RELEASE_URL
+curl -L $RELEASE_URL -o crustagen
 
 chmod +x crustagen
 
