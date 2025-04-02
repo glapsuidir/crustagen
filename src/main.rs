@@ -22,12 +22,20 @@ fn main() {
         .help("Include special characters in the new password")
         .action(clap::ArgAction::SetTrue)
     )
-        .get_matches();
+    .arg(
+        Arg::new("verbose")
+        .short('d')
+        .long("verbose")
+        .help("Display verbose output")
+        .action(clap::ArgAction::SetTrue)
+    )
+    .get_matches();
 
     let length: usize = *matches
     .get_one::<usize>("length")
     .unwrap_or(&12);
     let include_special = matches.get_flag("special");
+    let include_verbose = matches.get_flag("verbose");
 
     let password = generate_password(length, include_special);
 
