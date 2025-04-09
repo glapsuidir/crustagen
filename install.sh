@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="v0.1.0-alpha"
+VERSION="v0.1.1-alpha"
 
 echo "Fetching the latest release (including pre-releases) from GitHub..."
 echo "Latest version: $VERSION"
