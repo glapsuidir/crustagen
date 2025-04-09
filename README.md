@@ -1,4 +1,4 @@
-# Crustagen
+# Crustagen 🦀🔐
 
 ## Description
 
