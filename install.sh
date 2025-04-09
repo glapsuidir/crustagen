@@ -9,6 +9,8 @@ echo "Latest version: $VERSION"
 
 RELEASE_URL="https://github.com/glapsuidir/crustagen/releases/download/v0.1.0-alpha/crustagen"
 
+sudo mv -f crustagen /usr/local/bin/crustagen
+
 if [ "$VERSION" == "null" ]; then
     echo "Error: No valid release version found. Exiting."
     exit 1
