@@ -16,8 +16,8 @@ There are currently two ways to install Crustagen, with a method to install usin
 curl -sSL https://raw.githubusercontent.com/glapsuidir/crustagen/master/install.sh | bash
 ```
 
-1. The install script will start automatically
-2. Check to ensure crustagen is present in $PATH by running ‘echo $PATH’
+2. The install script will start automatically
+3. Check to ensure crustagen is present in $PATH by running ‘echo $PATH’
 
 ### Manual Compilation
 
