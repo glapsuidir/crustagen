@@ -1,9 +1,50 @@
 use clap::{Arg, Command};
 use rand::Rng;
+use std::fs;
+use std::path::Path;
+
+fn is_first_run() -> bool {
+    !Path::new("./config/crustagen/config.txt").exists()
+}
+
+fn mark_as_run() {
+    fs::create_dir_all("./config/crustagen").unwrap_or_else(|_| {
+        println!("Warning: Could not create config directory");
+    });
+
+    fs::write("./config/crustagen/config.txt", "initialized=true")
+        .unwrap_or_else(|_| {
+            println!("Warning: Could not write to config file");
+        })
+}
+
+fn display_welcome_message() {
+    println!("╔════════════════════════════════════════════════════╗");
+    println!("║                    CRUSTAGEN                       ║");
+    println!("║                  Version 0.1.1                     ║");
+    println!("╚════════════════════════════════════════════════════╝");
+    println!();
+    println!("Welcome to crustagen, an open source password generator written in Rust.");
+    println!("  - Generate a new password using the 'crustagen' command");
+    println!("  - Specify password length with '--length' or '-l'");
+    println!("  - Include special characters with '--special' or -'s'");
+    println!("  - Turn on verbose mode using '--verbose' or '-d'");
+    println!();
+    println!("! Use the command HISTIGNORE='crustagen*' before running this application. It \n prevents outputs from being saved to bash history, which could introduce \n potential security liabilities. !");
+}
 
 fn main() {
+    if is_first_run() {
+        display_welcome_message();
+        mark_as_run();
+
+        println!("Press Enter to continue...");
+        let mut input = String::new();
+        std::io::stdin().read_line(&mut input).unwrap();
+    }
+
     let matches = Command::new("crustagen")
-    .version("1.0")
+    .version("0.1.1")
     .author("Glapsuidir")
     .about("Generates a random password based on user parameters.")
     .arg(
@@ -29,6 +70,13 @@ fn main() {
         .help("Display verbose output")
         .action(clap::ArgAction::SetTrue)
     )
+    .arg(
+        Arg::new("output")
+        .short('o')
+        .long("output")
+        .help("Save the password to an encrypted file")
+        .action(clap::ArgAction::SetTrue)
+    )
     .get_matches();
 
     let length: usize = *matches
@@ -36,14 +84,19 @@ fn main() {
     .unwrap_or(&12);
     let include_special = matches.get_flag("special");
     let include_verbose = matches.get_flag("verbose");
+    let save_output = matches.get_flag("output");
 
-    let password = generate_password(length, include_special);
+    let password = generate_password(length, include_special, include_verbose);
 
     println!("Generated password: {}", password);
+
+    if save_output {
+        println!("Once updated, output will save to a file.");
+    }
     
 }
 
-fn generate_password(length: usize, include_special: bool) -> String {
+fn generate_password(length: usize, include_special: bool, include_verbose: bool) -> String {
     let mut rng = rand::thread_rng();
 
     let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -52,10 +105,14 @@ fn generate_password(length: usize, include_special: bool) -> String {
 
     let mut charset = format!("{}{}", letters, numbers);
     if include_special {
-        println!("Adding special characters to the charset.");
+        if include_verbose {
+            println!("Adding special characters to the charset... Done.");
+        }
         charset.push_str(specials);
     } else {
-        println!("Special characters are NOT included in this charset.");
+        if include_verbose {
+            println!("Special characters are not present in the charset.");
+        } 
     }
 
     (0..length)
