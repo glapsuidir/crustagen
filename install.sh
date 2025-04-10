@@ -2,7 +2,7 @@
 
 set -e
 
-sudo mkdir /etc/crustagen
+sudo mkdir -p /etc/crustagen
 cd /etc/crustagen
 
 VERSION="v0.1.1-alpha"
