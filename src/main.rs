@@ -30,7 +30,7 @@ fn display_welcome_message() {
     println!("  - Include special characters with '--special' or -'s'");
     println!("  - Turn on verbose mode using '--verbose' or '-d'");
     println!();
-    println!("! Use the command HISTIGNORE='crustagen*' before running this application. It \n prevents outputs from being saved to bash history, which could introduce \n potential security liabilities. !");
+    println!("! If you installed crustagen using install.sh, please ignore. Use the command\nHISTIGNORE='crustagen*' before running this program. It prevents outputs from\nbeing saved to bash history, which could introduce potential security\nliabilities. !");
 }
 
 fn main() {
@@ -77,15 +77,10 @@ fn main() {
     .unwrap_or(&12);
     let include_special = matches.get_flag("special");
     let include_verbose = matches.get_flag("verbose");
-    let save_output = matches.get_flag("output");
 
     let password = generate_password(length, include_special, include_verbose);
 
     println!("Generated password: {}", password);
-
-    if save_output {
-        println!("Once updated, output will save to a file.");
-    }
     
 }
 
