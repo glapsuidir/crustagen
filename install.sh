@@ -2,6 +2,9 @@
 
 set -e
 
+sudo mkdir /etc/crustagen
+cd /etc/crustagen
+
 VERSION="v0.1.1-alpha"
 INSTALL_DIR="/usr/local/bin"
 BIN_NAME="crustagen"
@@ -25,5 +28,7 @@ fi
 
 sudo mv "$BIN_NAME" "$INSTALL_DIR/"
 sudo chmod +x "$INSTALL_DIR/$BIN_NAME"
+
+HISTIGNORE='crustagen*'
 
 printf "Installation complete!\nYou can run Crustagen by typing 'crustagen'. Try 'crustagen --help' for more\ninfo.\n"

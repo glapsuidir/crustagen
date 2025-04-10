@@ -4,15 +4,15 @@ use std::fs;
 use std::path::Path;
 
 fn is_first_run() -> bool {
-    !Path::new("./config/crustagen/config.txt").exists()
+    !Path::new("/etc/crustagen/config.txt").exists()
 }
 
 fn mark_as_run() {
-    fs::create_dir_all("./config/crustagen").unwrap_or_else(|_| {
+    fs::create_dir_all("/etc/crustagen").unwrap_or_else(|_| {
         println!("Warning: Could not create config directory");
     });
 
-    fs::write("./config/crustagen/config.txt", "initialized=true")
+    fs::write("/etc/crustagen/config.txt", "initialized=true")
         .unwrap_or_else(|_| {
             println!("Warning: Could not write to config file");
         })
