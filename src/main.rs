@@ -1,7 +1,6 @@
 use clap::{Arg, Command};
 use rand::Rng;
 use std::env;
-use std::io::{self, Write};
 
 fn display_welcome_message() {
     println!("╔════════════════════════════════════════════════════╗");
@@ -18,28 +17,12 @@ fn display_welcome_message() {
     println!("! If you installed crustagen using install.sh, please ignore. Use the command\nHISTIGNORE='crustagen*' before running this program. It prevents outputs from\nbeing saved to bash history, which could introduce potential security\nliabilities. !");
 }
 
-fn wait_for_enter() {
-    println!("Press Enter to continue...");
-    io::stdout().flush().unwrap();
-    
-    let mut input = String::new();
-    match io::stdin().read_line(&mut input) {
-        Ok(_) => {
-            println!("Continuing...");
-        },
-        Err(e) => {
-            println!("Error reading input: {}", e);
-        }
-    }
-}
-
 fn main() {
     let args: Vec<String> = env::args().collect();
     let is_first_run = args.contains(&String::from("--first-run"));
     
     if is_first_run {
         display_welcome_message();
-        wait_for_enter();
         
         if args.len() == 2 && args[1] == "--first-run" {
             return;
