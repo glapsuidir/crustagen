@@ -41,10 +41,6 @@ fn main() {
         display_welcome_message();
         wait_for_enter();
         
-        println!("Press Enter to continue...");
-        let mut input = String::new();
-        std::io::stdin().read_line(&mut input).unwrap();
-        
         if args.len() == 2 && args[1] == "--first-run" {
             return;
         }
