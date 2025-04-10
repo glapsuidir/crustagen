@@ -4,7 +4,6 @@ set -e
 
 VERSION="v0.1.1-alpha"
 INSTALL_DIR="/usr/local/bin"
-CONFIG_DIR="/etc/crustagen"
 BIN_NAME="crustagen"
 RELEASE_URL="https://github.com/glapsuidir/crustagen/releases/download/$VERSION/$BIN_NAME"
 
@@ -33,4 +32,3 @@ sudo chmod +x "$INSTALL_DIR/$BIN_NAME"
 HISTIGNORE='crustagen*'
 
 printf "Installation complete!\nYou can run Crustagen by typing 'crustagen'. Try 'crustagen --help' for more \ninfo.\n"
-printf "Configuration folder created at: $CONFIG_DIR/\n"
