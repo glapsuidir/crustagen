@@ -1,22 +1,6 @@
 use clap::{Arg, Command};
 use rand::Rng;
-use std::fs;
-use std::path::Path;
-
-fn is_first_run() -> bool {
-    !Path::new("/etc/crustagen/config.txt").exists()
-}
-
-fn mark_as_run() {
-    fs::create_dir_all("/etc/crustagen").unwrap_or_else(|_| {
-        println!("Warning: Could not create config directory");
-    });
-
-    fs::write("/etc/crustagen/config.txt", "initialized=true")
-        .unwrap_or_else(|_| {
-            println!("Warning: Could not write to config file");
-        })
-}
+use std::env;
 
 fn display_welcome_message() {
     println!("╔════════════════════════════════════════════════════╗");
@@ -34,13 +18,19 @@ fn display_welcome_message() {
 }
 
 fn main() {
-    if is_first_run() {
+    let args: Vec<String> = env::args().collect();
+    let is_first_run = args.contains(&String::from("--first-run"));
+    
+    if is_first_run {
         display_welcome_message();
-        mark_as_run();
-
+        
         println!("Press Enter to continue...");
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).unwrap();
+        
+        if args.len() == 2 && args[1] == "--first-run" {
+            return;
+        }
     }
 
     let matches = Command::new("crustagen")
@@ -70,6 +60,13 @@ fn main() {
         .help("Display verbose output")
         .action(clap::ArgAction::SetTrue)
     )
+    .arg(
+        Arg::new("first-run")
+        .long("first-run")
+        .help("Show the welcome message")
+        .action(clap::ArgAction::SetTrue)
+        .hide(true)
+    )
     .get_matches();
 
     let length: usize = *matches
@@ -81,7 +78,6 @@ fn main() {
     let password = generate_password(length, include_special, include_verbose);
 
     println!("Generated password: {}", password);
-    
 }
 
 fn generate_password(length: usize, include_special: bool, include_verbose: bool) -> String {

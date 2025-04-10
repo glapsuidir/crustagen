@@ -29,6 +29,15 @@ fi
 sudo mv "$BIN_NAME" "$INSTALL_DIR/"
 sudo chmod +x "$INSTALL_DIR/$BIN_NAME"
 
-HISTIGNORE='crustagen*'
+if [ -f "${HOME}/.bashrc" ]; then
+    if ! grep -q "HISTIGNORE='crustagen\*'" "${HOME}/.bashrc"; then
+        echo "# Prevent crustagen passwords from being saved in history" >> "${HOME}/.bashrc"
+        echo "HISTIGNORE='crustagen*:$HISTIGNORE'" >> "${HOME}/.bashrc"
+        echo "Added HISTIGNORE for crustagen to your .bashrc"
+    fi
+fi
+
+echo "Launching Crustagen for the first time..."
+"$INSTALL_DIR/$BIN_NAME" --first-run
 
 printf "Installation complete!\nYou can run Crustagen by typing 'crustagen'. Try 'crustagen --help' for more \ninfo.\n"
