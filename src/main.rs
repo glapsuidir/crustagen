@@ -70,13 +70,6 @@ fn main() {
         .help("Display verbose output")
         .action(clap::ArgAction::SetTrue)
     )
-    .arg(
-        Arg::new("output")
-        .short('o')
-        .long("output")
-        .help("Save the password to an encrypted file")
-        .action(clap::ArgAction::SetTrue)
-    )
     .get_matches();
 
     let length: usize = *matches
