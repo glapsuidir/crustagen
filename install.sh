@@ -33,4 +33,4 @@ sudo chmod +x "$INSTALL_DIR/$BIN_NAME"
 HISTIGNORE='crustagen*'
 
 printf "Installation complete!\nYou can run Crustagen by typing 'crustagen'. Try 'crustagen --help' for more \ninfo.\n"
-printf "Configuration file created at: $CONFIG_DIR/config.txt\n"
+printf "Configuration folder created at: $CONFIG_DIR/\n"
