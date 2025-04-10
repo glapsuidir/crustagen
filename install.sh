@@ -30,10 +30,6 @@ fi
 sudo mv "$BIN_NAME" "$INSTALL_DIR/"
 sudo chmod +x "$INSTALL_DIR/$BIN_NAME"
 
-sudo mkdir -p "$CONFIG_DIR"
-
-echo "initialized=true" | sudo tee "$CONFIG_DIR/config.txt" > /dev/null
-
 HISTIGNORE='crustagen*'
 
 printf "Installation complete!\nYou can run Crustagen by typing 'crustagen'. Try 'crustagen --help' for more \ninfo.\n"
