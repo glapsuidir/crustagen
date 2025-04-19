@@ -8,7 +8,7 @@ fn display_welcome_message() {
     println!("║                  Version 0.1.1                     ║");
     println!("╚════════════════════════════════════════════════════╝");
     println!();
-    println!("Welcome to crustagen, an open source password generator written in Rust.");
+    println!("Crustagen is an open source password generator written in Rust.");
     println!("  - Generate a new password using the 'crustagen' command");
     println!("  - Specify password length with '--length' or '-l'");
     println!("  - Include special characters with '--special' or -'s'");
