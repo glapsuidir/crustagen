@@ -40,17 +40,14 @@ fi
 if [ -f "${HOME}/.zshrc" ]; then
     if ! grep -q "function skip_crustagen_from_history()" "${HOME}/.zshrc"; then
         echo "# Prevent crustagen commands and passwords from being saved in history" >> "${HOME}/.zshrc"
-        echo "
-            autoload -U add-zsh-hook
-
-            function skip_crustagen_from_history() {
-                if [[ $1 == crustagen* ]]; then
-                    return 1
-                fi
-            }
-
-            add-zsh-hook zshaddhistory skip_crustagen_from_history
-        " >> "${HOME}/.zshrc"
+        echo "autoload -U add-zsh-hook" >> "${HOME}/.zshrc"
+        echo "function skip_crustagen_from_history() {
+" >> "${HOME}/.zshrc"
+        echo "  if [[ $1 == crustagen* ]]; then" >> "${HOME}/.zshrc"
+        echo "      return 1" >> "${HOME}/.zshrc"
+        echo "  fi" >> "${HOME}/.zshrc"
+        echo "}" >> "${HOME}/.zshrc"
+        echo "add-zsh-hook zshaddhistory skip_crustagen_from_history" >> "${HOME}/.zshrc"
         echo "Added crustagen history ignore function to your .zshrc"
     fi
 fi
