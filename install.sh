@@ -50,7 +50,7 @@ if [ -f "${HOME}/.zshrc" ]; then
             }
 
             add-zsh-hook zshaddhistory skip_crustagen_from_history
-        "
+        " >> "${HOME}/.zshrc"
         echo "Added crustagen history ignore function to your .zshrc"
     fi
 fi
