@@ -42,7 +42,7 @@ if [ -f "${HOME}/.zshrc" ]; then
         echo "# Prevent crustagen commands and passwords from being saved in history" >> "${HOME}/.zshrc"
         echo "autoload -U add-zsh-hook" >> "${HOME}/.zshrc"
         echo "function skip_crustagen_from_history() {" >> "${HOME}/.zshrc"
-        echo -e " \tif [[ $1 == crustagen* ]]; then" >> "${HOME}/.zshrc"
+        echo -e " \tif [[ \$1 == crustagen* ]]; then" >> "${HOME}/.zshrc"
         echo -e "\t\treturn 1" >> "${HOME}/.zshrc"
         echo -e "\tfi" >> "${HOME}/.zshrc"
         echo "}" >> "${HOME}/.zshrc"
