@@ -14,7 +14,7 @@ fn display_welcome_message() {
     println!("  - Include special characters with '--special' or -'s'");
     println!("  - Turn on verbose mode using '--verbose' or '-d'");
     println!();
-    println!("! If you installed crustagen using install.sh, please ignore. Use the command\nHISTIGNORE='crustagen*' before running this program. It prevents outputs from\nbeing saved to bash history, which could introduce potential security\nliabilities. !");
+    println!("! If you installed crustagen using install.sh, please ignore. Use the command HISTIGNORE='crustagen*' before running this program. It prevents outputs from being saved to bash history, which could introduce potential security liabilities. If you are running zsh, refer to the install script for the zsh specific command. !");
 }
 
 fn main() {
